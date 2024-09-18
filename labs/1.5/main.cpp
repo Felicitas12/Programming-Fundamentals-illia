@@ -1,8 +1,7 @@
 /**
  * Done by:
- * Student Name: Severyn Kotyhoroshko
- * Student Group: 123
- * Lab 1.5
+ * Student Name: Illia Zhurbenko
+ * Student Group: 121
  */
 
 #include <iostream>
@@ -12,23 +11,25 @@ using namespace std;
 
 int main() {
     {
-        int a = 10;
-        int b = 20;
-        int c = 30;
-        int d = 40;
+        float a = 42.6;
+        float b = 3.0;
+        int c = 12;
+        int d = 79;
 
-        // <УЛО1> (<УЛО2> (A<ОВ1>B) <БЛО> (<УЛО3> (C<ОВ2>D)))
-        //  empty (  !    (a == b)    ^   (   !   (c != d)))
-        bool res = (!(a == b) ^ (!(c != d)));
+
+        bool res = ((a != b) && (!(c >= d)));
         cout << "res: " << boolalpha << res << endl;
     }
 
     {
-        int a = 0;
+        int a = 55;
+        int b = 55;
+        int c = 110;
+        int d = 112;
 
-        bool res = !a;
+
+        bool res = ((a != b) && (!(c >= d)));
         cout << "res: " << boolalpha << res << endl;
     }
-
     return 0;
 }
