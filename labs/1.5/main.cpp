@@ -31,5 +31,17 @@ int main() {
         bool res = ((a != b) && (!(c >= d)));
         cout << "res: " << boolalpha << res << endl;
     }
+
+
+
+    int A = 9872; // from table 12
+    int B = 29;
+    int C = 54.12f;
+    int D = 6;
+    int E = -11234;
+
+    bool res = (A & ~B * -C) == ((D * E) << sizeof(long));
+    cout << "res: " << boolalpha << res << endl;
+
     return 0;
 }
