@@ -1,7 +1,7 @@
 /**
  * Done by:
- * Student Name: Severyn Kotyhoroshko
- * Student Group: 123
+ * Student Name: Illia Zhurbenko
+ * Student Group: 121
  * Lab 1.5
  */
 
