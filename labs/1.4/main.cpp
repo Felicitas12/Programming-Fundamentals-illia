@@ -1,7 +1,7 @@
 /**
  * Done by:
- * Student Name: Severyn Kotyhoroshko
- * Student Group: 123
+ * Student Name: Illia Zhurbenko
+ * Student Group: 121
  * Lab 1.4
  */
 
@@ -10,87 +10,47 @@
 using namespace std;
 
 int main() {
-    // Comment to local scope 1
-    {
-        int num = 10;
-        int* ptr = &num; // ptr now holds the address of num
+    unsigned short usVar1;
+    int iVar2;
+    float fVar3;
+    double dbVar4;
 
-        cout << "Value of num: " << num << endl;        // Outputs: 10
-        cout << "Address of num: " << ptr << endl;      // Outputs the memory address of num
-        cout << "Value at the address stored in ptr: " << *ptr << endl; // Outputs: 10
+    // Опис вказівних змінних відповідних типів
+    unsigned short *pt_us;
+    int *pt_i;
+    float *pt_f;
+    double *pt_db;
 
-        num++;
-        cout << num << endl;
+    // Опис нетипізованої вказівної змінної
+    void *pV;
 
-        // delete ptr;         // Deallocates the memory
-        ptr = nullptr;         // Good practice to avoid dangling ptrs
-        cout << "Nullified ptr: " << ptr << endl;
-    }
+    // Ініціювання вказівних змінних адресами змінних
+    pt_us = &usVar1;
+    pt_i = &iVar2;
+    pt_f = &fVar3;
+    pt_db = &dbVar4;
 
-    // Comment to local scope 2
-    {
-        cout << "Pointer Arithmetic" << endl;
-        int arr[] = {1, 2, 3, 4, 5};
+    // Ініціювання змінних, використовуючи операцію розіменування вказівних змінних
+    *pt_us = 10;
+    *pt_i = -528;
+    *pt_f = 654.9962;
+    *pt_db = -4.5e25;
 
-        cout << "sizeof arr = " << sizeof(arr) << endl;
-        int* ptr = arr;         // Points to the first element of the array
+    // Визначення розміру всіх змінних
+    const int size_us = sizeof(usVar1);
+    const int size_i = sizeof(iVar2);
+    const int size_f = sizeof(fVar3);
+    const int size_db = sizeof(dbVar4);
 
-        const int firstEl = arr[0];
+    const int size_pt_us = sizeof(usVar1);
+    const int size_pt_i = sizeof(iVar2);
+    const int size_pt_f = sizeof(fVar3);
+    const int size_pt_db = sizeof(dbVar4);
 
-        cout << arr[0] << endl;   // Outputs: 1
-        cout << ptr << endl;   // Outputs: Address
-        cout << *ptr << endl;   // Outputs: 1
-        ptr++;                  // Moves to the next element
-        cout << *ptr << endl;   // Outputs: 2
-
-        ptr = nullptr;         // Good practice to avoid dangling ptrs
-        cout << "sizeof arr = " << sizeof(arr) << endl;
-    }
-
-    // Comment to local scope 3
-    {
-        cout << "Dynamic Memory Allocation for INT" << endl;
-        int* ptr = new int;    // Allocates memory for a single integer
-        *ptr = 20;             // Sets the value of the allocated memory
-
-        cout << *ptr << endl;  // Outputs: 20
-
-        delete ptr;            // Deallocates the memory
-        ptr = nullptr;         // Good practice to avoid dangling ptrs
-    }
-
-
-    // Comment to local scope 4
-    {
-        cout << "Dynamic Memory Allocation for ARR" << endl;
-        int* arr = new int[5]; // Allocates memory for an array of 5 integers
-
-        cout << "sizeof *arr = " << sizeof(*arr) << endl;
-        cout << "sizeof arr = " << sizeof(arr) << endl;
-
-        cout << arr << endl;
-        for(int i = 0; i < 5; i++) {
-            arr[i] = i + 1;    // Initializes array
-        }
-
-        delete[] arr;          // Deallocates the array memory
-        arr = nullptr;
-        cout << arr << endl;
-        cout << "sizeof *arr = " << sizeof(*arr) << endl;
-        cout << "sizeof arr = " << sizeof(arr) << endl;
-    }
-
-    // Comment to local scope 5
-    {
-        cout << "Pointers to Pointers" << endl;
-        int num = 10;
-        int* ptr = &num;
-        int** ptrToPtr = &ptr;
-
-        cout << **ptrToPtr << endl; // Outputs: 10
-        ptr = nullptr;
-        ptrToPtr = nullptr;
-    }
+    // Ініціювання нетипізованої вказівної змінної адресами типізованих вказівних змінних
+    pV = &fVar3;
 
     return 0;
+
+
 }
