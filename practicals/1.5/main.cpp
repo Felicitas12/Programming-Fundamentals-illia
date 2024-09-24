@@ -12,7 +12,7 @@
 using namespace std;
 
 void initRandomizer() {
-    // Seed the random number generator with the current time
+    // Ініціалізація генератора випадкових чисел з поточним часом
     srand(time(0));  // srand(time(NULL)) could also be used
 }
 
@@ -24,7 +24,7 @@ int main() {
        {
 
             int n;
-            cout << "Enter the length of the sequence: ";
+            cout << "Введіть довжину послідовності: ";
             cin >> n;
 
             int* arr = new int[n];
@@ -40,7 +40,7 @@ int main() {
             cout << endl;
 
             int p;
-            cout << "Enter the value P: ";
+            cout << "Введіть значення P: ";
             cin >> p;
 
             int index = -1; // Initialize index to -1 to indicate not found
@@ -52,9 +52,9 @@ int main() {
             }
 
             if (index != -1) {
-                cout << "The first occurrence of " << p << " is at index " << index << endl;
+                cout << "Перше входження значення " << p << " знаходиться на індексі " << index << endl;
             } else {
-                cout << "Value " << p << " not found in the sequence." << endl;
+                cout << "Значення " << p << " не знайдено в послідовності." << endl;
             }
 
             delete[] arr;
@@ -63,7 +63,7 @@ int main() {
     //Задано послідовність значень А[n]. Знайти найменше значення серед додатних елементів послідовності А[n].
        {
             int n;
-            cout << "Enter the length of the sequence: ";
+            cout << "Введіть довжину послідовності: ";
             cin >> n;
 
             int* arr = new int[n];
@@ -86,9 +86,9 @@ int main() {
             }
 
             if (minPositive != INT_MAX) {
-                cout << "The smallest positive value in the sequence is: " << minPositive << endl;
+                cout << "Найменше додатне значення в послідовності становить: " << minPositive << endl;
             } else {
-                cout << "No positive values found in the sequence." << endl;
+                cout << "Додатні значення не знайдено в послідовності." << endl;
             }
 
             delete[] arr;
@@ -97,16 +97,16 @@ int main() {
     // Задано послідовність значень А[n]. Знайти найбільше і найменше значення та поміняти їх місцями.
        {
             int n;
-            cout << "Enter the length of the sequence: ";
+            cout << "Введіть довжину послідовності: ";
             cin >> n;
 
             int* arr = new int[n];
-            // Populate the array with random values
+            // Заповнення масиву випадковими значеннями
             for (int i = 0; i < n; i++) {
                 arr[i] = rand() % 100;
             }
 
-            // cout the array
+            // Виводимо масив
             for (int i = 0; i < n; i++) {
                 cout << arr[i] << " ";
             }
@@ -128,12 +128,12 @@ int main() {
                 }
             }
 
-            // Swap the maximum and minimum values
+            // Перестановка максимального і мінімального значень
             int temp = arr[minIndex];
             arr[minIndex] = arr[maxIndex];
             arr[maxIndex] = temp;
 
-            cout << "The modified array after swapping the maximum and minimum values: ";
+            cout << "Модифікований масив після перестановки максимального і мінімального значень: ;
             for (int i = 0; i < n; i++) {
                 cout << arr[i] << " ";
             }
