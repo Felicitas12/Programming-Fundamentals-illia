@@ -1,76 +1,158 @@
-/**
-* Done by:
- * Student Name: Liza Rabirokh
- * Student Group: 121 1groups
- 
- */
-
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <bitset>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <thread>
+
 
 using namespace std;
 
-int main () {
+const string RESET = "\033[0m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BROWN = "\033[38;5;94m";
 
-/*. 
-Задано ціле значення А. Визначити, яких бітів (0 чи 1)
-більше в його двійковому поданні.
-*/
+void set_color(string color) {
+ cout << color;
+}
 
-int a = 5;
-int ones = 0;  
-int zeros = 0;
-cout << "Число 5 у двійковій системі: " <<bitset<8>(a) << endl;
+void reset_color() {
+ set_color(RESET);
+}
 
-for (int i = 0; i<8; i++){
-    if ( a & (1 << i)) {
-        ones++;
-        }
-        else {
-             zeros++; 
+void setRandomColor() {
+ const std::string colors[] = {
+  "\033[31m",  // Red
+  "\033[33m",  // Yellow
+  "\033[34m",  // Blue
+  "\033[35m",  // Purple
+  "\033[36m",  // Cyan
+  "\033[37m"   // White
+ };
+
+ int randomIndex = rand() % 6;
+
+ std::cout << colors[randomIndex];
+}
+
+
+void draw_triangle(int rows, int additional, char** tree, int& row_index) {
+ for (int i = 1, k = 0; i <= rows; ++i, k = 0, row_index++) {
+  for (int space = 1; space <= (rows + additional) - i; ++space) {
+   cout << "  ";
+  }
+  while (k != 2 * i - 1) {
+   if (rand() % 10 > 8) {
+    char ornament = "@$%#"[rand() % 4];
+
+    setRandomColor();
+    tree[row_index][k] = ornament;
+
+   }
+   else {
+    set_color(GREEN);
+    tree[row_index][k] = '*';
+   }
+   cout << tree[row_index][k] << ' ';
+   ++k;
+  }
+  cout << endl;
+  reset_color();
+ }
+}
+
+void draw_trunk(int width, int height, int max_width) {
+ for (int i = 0; i < height; i++) {
+  for (int j = 0; j < (max_width - width) / 2; j++) {
+   cout << "  ";
+  }
+  for (int j = 0; j < width; j++) {
+   set_color(BROWN);
+   cout << "| ";
+  }
+  cout << endl;
+ }
+ reset_color();
+}
+
+
+int main() {
+    srand(time(0));
+    int n;
+    cout << "Введіть n число: ";
+    cin >> n;
+
+    while (true) {
+        int rows = 5;
+        int margin = rows - 1;
+
+        int total_rows = 0;
+        for (int i = 0; i <= n; i++) total_rows += rows + i;
+
+        int max_width = 2 * (rows + n) - 1;
+
+        ofstream file("cristmas_tree.txt");
+        if (file.is_open()) {
+            for (int i = 0; i < n; i++) {
+                for (int k = 1, space = 0; k <= rows + i; ++k, space = 0) {
+                    for (space = 1; space <= (rows + n) - k; ++space) {
+                        file << "  ";
+                        cout << "  ";
+
+                    }
+                    for (int j = 0; j < 2 * k - 1; ++j) {
+                        if (rand() % 10 > 8) {
+                            char ornament = "@$%#"[rand() % 4];
+                            file << ornament << ' ';
+                            setRandomColor();
+                            cout << ornament << ' ';
+                        }
+                        else {
+                            set_color(GREEN);
+
+                            file << "* ";
+                            cout << "* ";
+                        }
+                    }
+                    file << endl;
+                    cout << endl;
+
+                }
             }
 
+            int trunk_height = n;
+            int trunk_width = max_width / 3;
+            for (int i = 0; i < trunk_height; i++) {
+                for (int j = 0; j < (max_width - trunk_width) / 2; j++) {
+                    file << "  ";
+                    cout << "  ";
+
+                }
+                for (int j = 0; j < trunk_width; j++) {
+                    file << "| ";
+                    cout << "| ";
+
+                }
+                file << endl;
+                cout << endl;
+
+            }
+
+            file.close();
+        }
+        else {
+            cout << "Не відкривається файл :(" << endl;
+        }
+
+        reset_color();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+#ifdef _WIN32
+        system("cls");
+#else
+        system("clear");
+#endif
+
     }
-    cout << "Кількість одиниць: " << ones << endl;
-    cout << "Кількість нулів: " << zeros << endl;
-
-    if (ones > zeros) {
-        cout << "Одиниць більше." << endl;
-        } 
-        else if (zeros > ones) {
-        cout << "Нулів більше." << endl;
-            } 
-            else {
-        cout << "Кількість нулів і одиниць однакова." << endl;
-    }
-
-     {
-    /**
-     * 2. Задано дві послідовності, які складаються з 0 та 1.
-Скласти специфікацію для моделювання операцій XOR.
-     */
-
-    vector<int> arr = {0, 0, 1, 0};
-    vector<int> arr1 = {0, 1, 0, 1,};
-
-    int minSize = min(arr.size(), arr1.size());
-    vector<int> arr2 (minSize);
-
-    // Виконання операції XOR
-
-    for (int i = 0; i < minSize; ++i) {
-        arr2[i] = arr[i] ^ arr1[i];
-         }
-         cout << "Результат XOR: ";
-
-        for (int i = 0; i < minSize; ++i) {
-        cout << arr2[i] << endl;
-         }
-         return 0;
-
-     }
-
-
- }
+    return 0;
+}
+//На маці може праювати не коректно(не очищається консоль кожен тік), оскільки це мак, але в теорії повинно, тим паче якщо йому скоріще всього не 12 років. На вінді все працює як треба.
